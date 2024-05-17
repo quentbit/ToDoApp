@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class TodoappApplication {
 
@@ -20,8 +22,38 @@ public class TodoappApplication {
         return runner -> {
             //createTask(taskListDAO);
 
-            createMultipleTasks(taskListDAO);
+            //createMultipleTasks(taskListDAO);
+
+            //readTask(taskListDAO);
+
+            queryForTasks(taskListDAO);
         };
+    }
+
+    private void queryForTasks(TaskListDAO taskListDAO) {
+
+        List<TaskList> theTasks = taskListDAO.findAll();
+
+        for (TaskList tempTask : theTasks) {
+            System.out.println(tempTask);
+        }
+    }
+
+    private void readTask(TaskListDAO taskListDAO) {
+
+        System.out.println("Creating new task object ...");
+        TaskList tempTask = new TaskList("Test read method");
+
+        System.out.println("Saving the task ...");
+        taskListDAO.save(tempTask);
+
+        int theId = tempTask.getId();
+        System.out.println("Saved task. Generated id: " + theId);
+
+        System.out.println("Retrieving task with id: " + theId);
+        TaskList myTask = taskListDAO.findById(theId);
+
+        System.out.println("Found the task: " + myTask);
     }
 
     private void createMultipleTasks(TaskListDAO taskListDAO) {
