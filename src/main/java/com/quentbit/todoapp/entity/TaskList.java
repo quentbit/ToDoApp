@@ -17,8 +17,7 @@ public class TaskList {
     public TaskList() {
     }
 
-    public TaskList(int id, String task) {
-        this.id = id;
+    public TaskList(String task) {
         this.task = task;
     }
 
