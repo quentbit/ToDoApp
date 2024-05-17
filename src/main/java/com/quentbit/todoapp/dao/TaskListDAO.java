@@ -11,4 +11,6 @@ public interface TaskListDAO {
     TaskList findById(Integer id);
 
     List<TaskList> findAll();
+
+    void update(TaskList theTask);
 }

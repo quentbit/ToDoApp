@@ -26,8 +26,24 @@ public class TodoappApplication {
 
             //readTask(taskListDAO);
 
-            queryForTasks(taskListDAO);
+            //queryForTasks(taskListDAO);
+
+            updateTask(taskListDAO);
         };
+    }
+
+    private void updateTask(TaskListDAO taskListDAO) {
+
+        int taskId = 5;
+        System.out.println("Getting student with id: " + taskId);
+        TaskList myTask = taskListDAO.findById(taskId);
+
+        System.out.println("Updating task ...");
+        myTask.setTask("Test update method");
+
+        taskListDAO.update(myTask);
+
+        System.out.println("Updated task: " + myTask);
     }
 
     private void queryForTasks(TaskListDAO taskListDAO) {

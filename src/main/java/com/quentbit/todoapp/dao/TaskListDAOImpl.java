@@ -34,4 +34,10 @@ public class TaskListDAOImpl implements TaskListDAO {
 
         return theQuery.getResultList();
     }
+
+    @Override
+    @Transactional
+    public void update(TaskList theTask) {
+        entityManager.merge(theTask);
+    }
 }
