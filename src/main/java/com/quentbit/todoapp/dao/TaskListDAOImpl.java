@@ -40,4 +40,21 @@ public class TaskListDAOImpl implements TaskListDAO {
     public void update(TaskList theTask) {
         entityManager.merge(theTask);
     }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        TaskList theTask = entityManager.find(TaskList.class, id);
+
+        entityManager.remove(theTask);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+
+        int numRowsDeleted = entityManager.createQuery("DELETE FROM TaskList").executeUpdate();
+
+        return numRowsDeleted;
+    }
 }

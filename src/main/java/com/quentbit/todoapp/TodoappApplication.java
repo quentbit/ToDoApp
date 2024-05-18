@@ -28,8 +28,26 @@ public class TodoappApplication {
 
             //queryForTasks(taskListDAO);
 
-            updateTask(taskListDAO);
+            //updateTask(taskListDAO);
+
+            //deleteTask(taskListDAO);
+
+            //deleteAllTasks(taskListDAO);
         };
+    }
+
+    private void deleteAllTasks(TaskListDAO taskListDAO) {
+
+        System.out.println("Deleting all Tasks");
+        int numRowsDeleted = taskListDAO.deleteAll();
+        System.out.println("Deleted row count: " + numRowsDeleted);
+    }
+
+    private void deleteTask(TaskListDAO taskListDAO) {
+
+        int taskId = 1;
+        System.out.println("Deleting task id: " + taskId);
+        taskListDAO.delete(taskId);
     }
 
     private void updateTask(TaskListDAO taskListDAO) {
@@ -75,9 +93,9 @@ public class TodoappApplication {
     private void createMultipleTasks(TaskListDAO taskListDAO) {
 
         System.out.println("Creating 3 taskList objects ...");
-        TaskList tempTask1 = new TaskList("Create read method");
-        TaskList tempTask2 = new TaskList("Create update method");
-        TaskList tempTask3 = new TaskList("Create delete method");
+        TaskList tempTask1 = new TaskList("Implement todo web UI");
+        TaskList tempTask2 = new TaskList("Modify todo app with REST API");
+        TaskList tempTask3 = new TaskList("Research MVC for todo app");
 
         System.out.println("Saving the tasks ...");
         taskListDAO.save(tempTask1);

@@ -13,4 +13,8 @@ public interface TaskListDAO {
     List<TaskList> findAll();
 
     void update(TaskList theTask);
+
+    void delete(Integer id);
+
+    int deleteAll();
 }
