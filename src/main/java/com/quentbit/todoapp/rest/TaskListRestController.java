@@ -1,7 +1,10 @@
 package com.quentbit.todoapp.rest;
 
+import com.quentbit.todoapp.dao.TaskListDAO;
 import com.quentbit.todoapp.entity.TaskList;
+import com.quentbit.todoapp.service.TaskListService;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,33 +16,16 @@ import java.util.List;
 @RequestMapping("/api")
 public class TaskListRestController {
 
-    private List<TaskList> theTasks;
+    private TaskListService taskListService;
 
-    @PostConstruct
-    public void loadData() {
-
-        theTasks = new ArrayList<>();
-
-        theTasks.add(new TaskList("Todo Task 1"));
-        theTasks.add(new TaskList("Todo Task 2"));
-        theTasks.add(new TaskList("Todo Task 3"));
+    @Autowired
+    public TaskListRestController(TaskListService theTaskListService) {
+        taskListService = theTaskListService;
     }
 
     @GetMapping("/tasks")
-    public List<TaskList> getTasks() {
-
-        return theTasks;
+    public List<TaskList> findAll() {
+        return taskListService.findAll();
     }
-
-    @GetMapping("/tasks/{taskId}")
-    public TaskList getTask(@PathVariable int taskId) {
-
-        if ((taskId >= theTasks.size()) || (taskId < 0)) {
-            throw new TaskListNotFoundException("Task id not found - " + taskId);
-        }
-
-        return theTasks.get(taskId);
-    }
-
 
 }
