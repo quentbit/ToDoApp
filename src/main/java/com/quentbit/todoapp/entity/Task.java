@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="task_list")
-public class TaskList {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,13 +12,13 @@ public class TaskList {
     private int id;
 
     @Column(name="task")
-    private String task;
+    private String taskDescription;
 
-    public TaskList() {
+    public Task() {
     }
 
-    public TaskList(String task) {
-        this.task = task;
+    public Task(String taskDescription) {
+        this.taskDescription = taskDescription;
     }
 
     public int getId() {
@@ -29,19 +29,19 @@ public class TaskList {
         this.id = id;
     }
 
-    public String getTask() {
-        return task;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setTaskDescription(String task) {
+        this.taskDescription = task;
     }
 
     @Override
     public String toString() {
         return "TaskList{" +
                 "id=" + id +
-                ", task='" + task + '\'' +
+                ", task='" + taskDescription + '\'' +
                 '}';
     }
 }
