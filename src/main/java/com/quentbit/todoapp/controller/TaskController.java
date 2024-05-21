@@ -4,10 +4,7 @@ import com.quentbit.todoapp.entity.Task;
 import com.quentbit.todoapp.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,16 @@ public class TaskController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
         Task theTask = new Task();
+
+        theModel.addAttribute("task", theTask);
+
+        return "tasks/task-form";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("taskId") int theId, Model theModel){
+
+        Task theTask = taskService.findById(theId);
 
         theModel.addAttribute("task", theTask);
 
